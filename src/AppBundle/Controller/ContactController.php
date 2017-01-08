@@ -66,7 +66,7 @@ class ContactController extends Controller
     public function getContactsAction()
     {
         $contact = [
-            ['id' => 1, 'firstname' => 'AquaPelham', 'lastname' => 'lolita', 'phonenumber' => '55543210', 'bday' => 'Dec. 10 2015', 'address' => 'Pikk 7-2'],
+            ['id' => 1, 'firstname' => 'AquaPelham', 'lastname' => 'lala', 'phonenumber' => '6543210', 'bday' => 'Dec. 10 2015', 'address' => 'tartu'],
             ['id' => 2, 'firstname' => 'AquaWeaver', 'lastname' => 'ryan', 'phonenumber' => '123456', 'bday' => 'Dec. 1 2015', 'address' => ''],
             ['id' => 3, 'firstname' => 'AquaPelham', 'lastname' => 'leanna', 'phonenumber' => '7890123', 'bday' => 'Aug. 20 2015', 'address' => 'tallinn'],
     ];
