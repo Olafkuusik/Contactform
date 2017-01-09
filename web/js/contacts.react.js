@@ -14,6 +14,9 @@ var ContactSection = React.createClass({
         $.ajax({
             url: this.props.url,
             success: function (data) {
+                if (!data.contacts) {
+                    throw 'AJAX call for contacts appears to be corrupted! The response does not have a "contacts" key. Check the AJAX call!';
+                }
                 this.setState({contacts: data.contacts});
             }.bind(this)
         });
