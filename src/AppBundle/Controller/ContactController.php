@@ -91,7 +91,7 @@ class ContactController extends Controller
             ['id' => 3, 'firstname' => 'AquaPelham', 'lastname' => 'leanna', 'phonenumber' => '7890123', 'bday' => 'Aug. 20 2015', 'address' => 'tallinn'],
     ];
         $data = [
-            'contact' => $contact
+            'contacts' => $contact
         ];
         return new JsonResponse($data);
     }
