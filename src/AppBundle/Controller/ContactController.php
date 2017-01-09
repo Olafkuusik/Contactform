@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Contacts;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,7 +24,22 @@ class ContactController extends Controller
     {
         return $this->render('contactform/index.html.twig');
     }
-
+    /**
+     * @Route("/contactform/new")
+     */
+    public function newAction()
+    {
+        $contact = new Contacts();
+        $contact->setfirstname('Octopus'.rand(1, 100));
+        $contact->setlastname('Octopodinae');
+        $contact->setbday(1388516401);
+        $contact->setphonenumber(rand(100, 99999));
+        $contact->setaddress('');
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($contact);
+        $em->flush();
+        return new Response('<html><body>Contact created!</body></html>');
+    }
 
     /**
      * @Route("/contactform/insert", name="contact_insert")
@@ -57,6 +73,10 @@ class ContactController extends Controller
      */
     public function listAction()
     {
+        $em = $this ->getDoctrine()->getManager();
+        $contacts = $em->getRepository('AppBundle:Contacts')
+            ->findAll();
+        dump($contacts);die;
         return $this->render('contactform/list.html.twig');
     }
     /**
