@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -16,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="contacts")
  */
-class Contacts
+class Contacts //Mapping & Form validation
 {
     /**
      * @ORM\Id
@@ -25,32 +26,50 @@ class Contacts
      */
     private $id;
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $firstname;
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $lastname;
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="datetime")
      */
-    private $bday;
+    private $birthday;
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private $phonenumber;
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=True)
      */
     private $address;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFamily = false;
+
+// Setters & Getters are below here
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return mixed
      */
     public function getFirstname()
     {
-        return $this->firstname;
+    return $this->firstname;
     }
 
     /**
@@ -80,17 +99,17 @@ class Contacts
     /**
      * @return mixed
      */
-    public function getBday()
+    public function getBirthday()
     {
-        return $this->bday;
+        return $this->birthday;
     }
 
     /**
-     * @param mixed $bday
+     * @param mixed $birthday
      */
-    public function setBday($bday)
+    public function setBirthday($birthday)
     {
-        $this->bday = $bday;
+        $this->birthday = $birthday;
     }
 
     /**
@@ -124,5 +143,19 @@ class Contacts
     {
         $this->address = $address;
     }
+    /**
+     * @return mixed
+     */
+    public function getIsFamily()
+    {
+        return $this->isFamily;
+    }
 
+    /**
+     * @param mixed $isFamily
+     */
+    public function setIsFamily($isFamily)
+    {
+        $this->isFamily = $isFamily;
+    }
 }

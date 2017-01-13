@@ -1,20 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>List on all contacts</h1>
-<!-- {#   <a href="{{ path('contact_info') }}">Json Info</a> #} -->
-<!--
-<ul>
-    {#{% for contact in contacts %} #}
-        <li>firstname</li>
-        <li>lastname</li>
-        <li>phonenumber</li>
-        <li>birthday</li>
-        <li>address</li>
-        <hr>
-    {#{% endfor %} #}
-</ul>
--->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pull-right" style="margin-bottom: 10px; margin-top: 20px;">
+                    <a href="{{ path('contact_new') }}" class="btn btn-primary pull-right">Add <span class="fa fa-plus-circle"></span></a>
+                </div>
+                <h1>Genuses</h1>
+                <table class="table table-striped">
+                    <tr>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    {% for contact in Contacts %}
+                        <tr>
+                            <td>{{ contact.firstname }} {{ contact.lastname }}</td>
+                            <td>
+                                <a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-xs btn-success"><span class="fa fa-pencil"></span></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
     <div id="js-contacts-wrapper"></div>
 
 <a href="{{ path('contact_edit') }}">edit, should be at the end of each contact</a>
