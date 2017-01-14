@@ -77,20 +77,28 @@ class ContactController extends Controller
 
     /**
      * @Route("/contactform/list/", name="contact_list")
-     * @Method("GET")
      */
-    public function listAction(Contacts $id)
+    public function listAction()
     {
+        $contacts = $this->getDoctrine()
+            ->getRepository('AppBundle:Contacts')
+            ->findAll();
+        return $this->render('contactform/list.html.twig', array(
+            'contacts' => $contacts
+        ));
+    }
+
+    /* {
         $em = $this ->getDoctrine()->getManager();
         $contacts = $em->getRepository('AppBundle:Contacts')
             ->findAll();
-        //dump($contacts);die;
+        dump($contacts);die;
         return $this->render('contactform/list.html.twig', array(
             'id' => $contacts,
             'contact' => $contacts
 
         ));
-    }
+    }*/
     /**
      * @Route("/contactform/list/contacts", name="contact_contacts")
      * @Method("GET")
