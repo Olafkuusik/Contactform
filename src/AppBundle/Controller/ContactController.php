@@ -22,14 +22,14 @@ class ContactController extends Controller
     /**
      * @Route("/contactform/", name="contact_index")
      */
-    public function indexPageAction()
+    public function indexPageAction() //Main menu page
     {
         return $this->render('contactform/index.html.twig');
     }
     /**
      * @Route("/contactform/new", name="contact_new")
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request) //Creates new entry to the contactform database
     {
         $form = $this->createForm(ContactFormType::class);
 
@@ -40,7 +40,7 @@ class ContactController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($contacts);
             $em->flush();
-            $this->addFlash('success', 'Contact created!');
+            $this->addFlash('Success', 'Contact created!');
             return $this->redirectToRoute('contact_index');
         }
        return $this->render('contactform/new.html.twig', ['contactForm' => $form->createView()]);
@@ -48,7 +48,7 @@ class ContactController extends Controller
     /**
      * @Route("/contactform/remove", name="contact_remove")
      */
-    public function removeAction()
+    public function removeAction() //Removes entry from the database
     {
         return $this->render('contactform/remove');
     }
@@ -56,7 +56,7 @@ class ContactController extends Controller
     /**
      * @Route("/contactform/{id}/edit", name="contact_edit")
      */
-    public function editAction(Request $request, Contacts $contacts)
+    public function editAction(Request $request, Contacts $contacts) //fills the form with data from database, user can then resubmit the data
     {
         $form = $this->createForm(ContactFormType::class, $contacts);
 
@@ -67,7 +67,7 @@ class ContactController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($contacts);
             $em->flush();
-            $this->addFlash('success', 'Contact updated!');
+            $this->addFlash('Success', 'Contact updated!');
             return $this->redirectToRoute('contact_list');
         }
         return $this->render('contactform/edit.html.twig',
@@ -78,7 +78,7 @@ class ContactController extends Controller
     /**
      * @Route("/contactform/list/", name="contact_list")
      */
-    public function listAction()
+    public function listAction() //lists all contacts in order on creation
     {
         $contacts = $this->getDoctrine()
             ->getRepository('AppBundle:Contacts')
@@ -101,16 +101,19 @@ class ContactController extends Controller
     }*/
     /**
      * @Route("/contactform/list/contacts", name="contact_contacts")
-     * @Method("GET")
      */
-    public function getContactsAction(Contacts $contactname, Contacts $contact)
+    public function getContactsAction() //first ajax version of contacts creation and listing, partially in use
     {
-        $contact->getContacts(); //problems here i guess, i commented the old working fixed code
-     /*   $contact = [
-            ['id' => 1, 'firstname' => 'AquaPelham', 'lastname' => 'lala', 'phonenumber' => '6543210', 'bday' => 'Dec. 10 2015', 'address' => 'tartu'],
-            ['id' => 2, 'firstname' => 'AquaWeaver', 'lastname' => 'ryan', 'phonenumber' => '123456', 'bday' => 'Dec. 1 2015', 'address' => 'tere'],
-            ['id' => 3, 'firstname' => 'AquaPelham', 'lastname' => 'leanna', 'phonenumber' => '7890123', 'bday' => 'Aug. 20 2015', 'address' => 'tallinn'],
-    ];*/
+        $contact = $this->getDoctrine()
+            ->getRepository('AppBundle:Contacts')
+            ->findAll();
+       // dump($contact);die;
+        /*  $contact->getContacts(); //problems here i guess, i commented the old working fixed code
+          $contact = [
+              ['id' => 1, 'firstname' => 'AquaPelham', 'lastname' => 'lala', 'phonenumber' => '6543210', 'bday' => 'Dec. 10 2015', 'address' => 'tartu'],
+              ['id' => 2, 'firstname' => 'AquaWeaver', 'lastname' => 'ryan', 'phonenumber' => '123456', 'bday' => 'Dec. 1 2015', 'address' => 'tere'],
+              ['id' => 3, 'firstname' => 'AquaPelham', 'lastname' => 'leanna', 'phonenumber' => '7890123', 'bday' => 'Aug. 20 2015', 'address' => 'tallinn'],
+      ];*/
         $data = [
             'contacts' => $contact
         ];
@@ -119,7 +122,7 @@ class ContactController extends Controller
     /**
      * @Route("/contactform/list/{contactName}")
      */
-    public function showAction($contactName)
+    public function showAction($contactName) //first version of entry rendering, using contactname as the identifier, currently replaced by forms
     {
         return $this->render('contactform/show.html.twig', array(
             'name' => $contactName
