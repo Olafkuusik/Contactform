@@ -8,7 +8,7 @@
                     <a href="{{ path('contact_new') }}" class="btn btn-primary pull-right">Add <span class="fa fa-plus-circle"></span></a>
                 </div>
                 <div class="pull-right" style="margin-bottom: 10px; margin-top: 20px;">
-                    <a href="{{ path('contact_sort') }}" class="btn btn-primary pull-right">Add <span class="fa fa-plus-circle"></span></a>
+
                 </div>
                 <h1>Contacts</h1>
                 <table class="table table-striped">
@@ -25,6 +25,10 @@
                             <td>
                                 <a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-xs btn-success"><span class="fa fa-pencil"></span></a>
                             </td>
+                            <td>
+                                <a href="{{ path('contact_remove', {'id': contact.id}) }}" class="btn btn-xs btn-danger"><span class="fa fa-recycle"></span></a>
+                            </td>
+                            <td>{{ ('now'|date('Y') - contact.birthday|date('Y') - 1) + ('now'|date('Y-m-d')|date('U') - contact.birthday|date('Y-m-d')|date('U') >= 0 ? 1 : 0) }}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -34,7 +38,6 @@
     <div id="js-contacts-wrapper"></div>
 
 
-<a href="{{ path('contact_remove') }}">remove, should be at the end of each contact</a>
 
 <a href="{{ path('contact_index') }}">back to main menu</a>
 

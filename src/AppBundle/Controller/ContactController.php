@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ContactController extends Controller
 {
@@ -46,20 +47,24 @@ class ContactController extends Controller
        return $this->render('contactform/new.html.twig', ['contactForm' => $form->createView()]);
     }
     /**
-     * @Route("/contactform/remove", name="contact_remove")
+     * @Route("/contactform/{id}/remove", name="contact_remove")
      */
-    public function removeAction() //Removes entry from the database
+    public function removeAction($id, Contacts $contacts) //Deletes contact from database
     {
-        return $this->render('contactform/remove');
+        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:Contacts');
+        $contactRepo = $repository->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($contactRepo);
+        $em->flush();
+        $this->addFlash('Success', 'Contact deleted!');
+        return $this->redirectToRoute('contact_index');
     }
-
     /**
      * @Route("/contactform/{id}/edit", name="contact_edit")
      */
-    public function editAction(Request $request, Contacts $contacts) //fills the form with data from database, user can then resubmit the data
+    public function editAction(Request $request, Contacts $contacts) //fills the form with data from database, user can then modify the data
     {
         $form = $this->createForm(ContactFormType::class, $contacts);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -83,9 +88,23 @@ class ContactController extends Controller
         $contacts = $this->getDoctrine()
             ->getRepository('AppBundle:Contacts')
             ->findAll();
+
         return $this->render('contactform/list.html.twig', array(
             'contacts' => $contacts
         ));
+    }
+    public function listAgeAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+            'select DATE_DIFF(CURRENT_DATE(),birthday)
+          from AppBundle:Contacts'
+        );
+
+        $contacts = $query->getResult();
+        return $this->render('contactform/list.html.twig',array(
+            'birthday' => '$contacts'
+            ));
     }
 
     /* {
