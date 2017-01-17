@@ -138,15 +138,4 @@ class ContactController extends Controller
         ];
         return new JsonResponse($data);
     }
-    /**
-     * @Route("/contactform/list/{contactName}")
-     */
-    public function showAction($contactName) //first version of entry rendering, using contactname as the identifier, currently replaced by forms
-    {
-        return $this->render('contactform/show.html.twig', array(
-            'name' => $contactName
-        ));
-    }
-
-
 }

@@ -1,4 +1,0 @@
-services:
-#    contact_form.example:
-#        class: BrightSpark\ContactFormBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
