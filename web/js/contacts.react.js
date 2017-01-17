@@ -39,7 +39,7 @@ var ContactList = React.createClass({
     render: function() {
         var contactNodes = this.props.contact.map(function(contact) {
             return (
-                <ContactBox firstname={contact.firstname} lastname={contact.lastname} bday={contact.bday} phonenumber={contact.phonenumber} address={contact.address} key={contact.id}>{contact.contact}</ContactBox>
+                <ContactBox firstname={contact.firstname} lastname={contact.lastname} birthday={contact.birthday} phonenumber={contact.phonenumber} address={contact.address} isFamily={contact.isFamily} key={contact.id}>{contact.contact}</ContactBox>
             );
         });
 
@@ -58,7 +58,7 @@ var ContactBox = React.createClass({
                 <div className="cd-timeline-content">
                     <h2><a href="#">{this.props.firstname}</a></h2>
                     <p>{this.props.children}</p>
-                    <span className="cd-date">{this.props.bday}</span>
+                    <span className="cd-date">{this.props.birthday}</span>
                 </div>
             </div>
         );
