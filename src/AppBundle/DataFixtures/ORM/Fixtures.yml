@@ -1,0 +1,8 @@
+AppBundle\Entity\Contacts:
+    contacts_{1..100}:
+        firstname: <firstName()>
+        lastname: <lastName()>
+        birthday: <dateTime()>
+        phonenumber: <phoneNumber()>
+        address: <address()>
+        isfamily: <boolean()>

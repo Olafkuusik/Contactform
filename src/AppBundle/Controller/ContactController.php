@@ -23,7 +23,7 @@ class ContactController extends Controller
     /**
      * @Route("/contactform/", name="contact_index")
      */
-    public function indexPageAction() //Main menu page
+    public function menuPageAction() //Main menu page
     {
         return $this->render('contactform/index.html.twig');
     }
@@ -47,7 +47,7 @@ class ContactController extends Controller
        return $this->render('contactform/new.html.twig', ['contactForm' => $form->createView()]);
     }
     /**
-     * @Route("/contactform/{id}/remove", name="contact_remove")
+     * @Route("/contactform/remove/{id}", name="contact_remove")
      */
     public function removeAction($id, Contacts $contacts) //Deletes contact from database
     {
@@ -60,7 +60,7 @@ class ContactController extends Controller
         return $this->redirectToRoute('contact_index');
     }
     /**
-     * @Route("/contactform/{id}/edit", name="contact_edit")
+     * @Route("/contactform/edit/{id}", name="contact_edit")
      */
     public function editAction(Request $request, Contacts $contacts) //fills the form with data from database, user can then modify the data
     {
@@ -83,41 +83,38 @@ class ContactController extends Controller
     /**
      * @Route("/contactform/list/", name="contact_list")
      */
-    public function listAction() //lists all contacts in order on creation
+    public function listAction(Request $request) //lists all contacts and paginates
     {
         $contacts = $this->getDoctrine()
             ->getRepository('AppBundle:Contacts')
             ->findAll();
-
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $contacts,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit',5)
+        );
         return $this->render('contactform/list.html.twig', array(
-            'contacts' => $contacts
+            'contacts' => $contacts,
+            'pagination' => $result,
         ));
     }
-    public function listAgeAction()
+    public function listAgeAction() //queries the birthday for age calculation
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery(
             'select DATE_DIFF(CURRENT_DATE(),birthday)
           from AppBundle:Contacts'
         );
-
         $contacts = $query->getResult();
         return $this->render('contactform/list.html.twig',array(
             'birthday' => '$contacts'
             ));
     }
 
-    /* {
-        $em = $this ->getDoctrine()->getManager();
-        $contacts = $em->getRepository('AppBundle:Contacts')
-            ->findAll();
-        dump($contacts);die;
-        return $this->render('contactform/list.html.twig', array(
-            'id' => $contacts,
-            'contact' => $contacts
-
-        ));
-    }*/
     /**
      * @Route("/contactform/list/contacts", name="contact_contacts")
      */
