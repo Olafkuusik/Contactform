@@ -15,10 +15,10 @@ ContactForm inlcudes
 ========================
 This project uses the standard Symfony 3 Bundles and 4 additional Bundles:
 
-* KnpPaginatorBundle (Not fully implemented)
-* Nelmio/Alice Fixtures Generator Bundle
-* Doctrine/Migrations Bundle
-* JMS Serializer Bundle (Not fully implemented)
+* [**Nelmio/Alice Fixtures Generator Bundle**][14] - Generates fixtures to fill the contact database
+* [**KnpPaginatorBundle (Not fully implemented)**][15]
+* [**Doctrine/Migrations Bundle**][16] - Generates migrations for entities, making it easier to enter/edit fields in database
+* [**JMS Serializer Bundle (Not fully implemented)**][17]
 
   * **FrameworkBundle** - The core Symfony framework bundle
 
@@ -32,7 +32,7 @@ This project uses the standard Symfony 3 Bundles and 4 additional Bundles:
   * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
     component
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
+  * [**SwiftmailerBundle**] - Adds support for Swiftmailer, a library for
     sending emails
 
   * [**MonologBundle**][11] - Adds support for Monolog, a logging library
