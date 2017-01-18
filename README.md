@@ -13,10 +13,12 @@ The paginator full implementation, search, sorting and ajax calls will be added 
 
 ContactForm inlcudes
 ========================
-This project uses the standard Symfony 3 package and 2 additional Bundles:
+This project uses the standard Symfony 3 Bundles and 4 additional Bundles:
 
 * KnpPaginatorBundle (Not fully implemented)
-* Nelmio/Alice fixtures generator
+* Nelmio/Alice Fixtures Generator Bundle
+* Doctrine/Migrations Bundle
+* JMS Serializer Bundle (Not fully implemented)
 
   * **FrameworkBundle** - The core Symfony framework bundle
 
@@ -48,7 +50,8 @@ This project uses the standard Symfony 3 package and 2 additional Bundles:
     integration
 
 All libraries and bundles included in the project are
-released under the MIT or BSD license. I would like to thank Ryan Weaver for helping me a few bugfixes with reactjs.
+released under the MIT or BSD license. 
+I would like to thank Ryan Weaver for helping me with a few bugfixes with reactjs.
 
 Enjoy!
 
@@ -60,5 +63,8 @@ Enjoy!
 [11]: https://symfony.com/doc/3.2/logging.html
 [12]: https://symfony.com/doc/3.2/assetic/asset_management.html
 [13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+
 [14]: https://github.com/nelmio/alice
 [15]: https://github.com/KnpLabs/KnpPaginatorBundle
+[16]: https://github.com/doctrine/DoctrineMigrationsBundle
+[17]: https://github.com/schmittjoh/JMSSerializerBundle
