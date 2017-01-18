@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {{ parent() }}
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="pull-right" style="margin-bottom: 10px; margin-top: 20px;">
                     <a href="{{ path('contact_new') }}" class="btn btn-primary pull-right">Add <span class="fa fa-plus-circle"></span></a>
-                </div>
-                <div class="pull-right" style="margin-bottom: 10px; margin-top: 20px;">
-
                 </div>
                 <h1>Contacts</h1>
                 <table class="table table-striped">
@@ -17,7 +15,6 @@
                         <th>Edit</th>
                         <th>Remove</th>
                         <th>Age</th>
-                        <th>&nbsp</th>
                     </tr>
                     {% for contact in contacts %}
                         <tr>
@@ -39,48 +36,4 @@
     <div class="navigation text-center">
         {{ knp_pagination_render(pagination) }}
     </div>
-
-    <div id="js-contacts-wrapper"></div>
-
-
-{#    #}{# total items count #}{#
-    <div class="count">
-        {{ pagination.getTotalItemCount }}
-    </div>
-    <table>
-        <tr>
-            #}{# sorting of properties based on query components #}{#
-            <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
-            <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}</th>
-        </tr>
-
-        #}{# table body #}{#
-        {% for article in pagination %}
-            <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    #}{# display navigation #}{#
-    <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
-    </div> #}
-
-{% endblock %}
-{%  block javascripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    {{ parent() }}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-
-    <script type="text/babel" src="{{ asset('js/contacts.react.js') }}"></script>
-    <script type="text/babel">
-        var contactsUrl = '{{ path('contact_contacts') }}'
-        ReactDOM.render(
-                <ContactSection url={contactsUrl} />,
-            document.getElementById('js-contacts-wrapper')
-        );
-    </script>
 {% endblock %}

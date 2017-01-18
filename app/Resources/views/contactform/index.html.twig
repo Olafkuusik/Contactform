@@ -1,6 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<h1>Menu</h1>
-<a href="{{ path('contact_new') }}">Add new contact</a>
-<a href="{{ path('contact_list') }}">View contact list</a>
+    {{ parent() }}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Menu</h1>
+                <nav>
+                    <a href="{{ path('contact_new') }}">Add new contact</a>
+                    <br>
+                    <a href="{{ path('contact_list') }}">View contact list</a>
+                </nav>
+            </div>
+        </div>
+    </div>
 {%  endblock %}

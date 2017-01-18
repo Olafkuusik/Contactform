@@ -1,28 +1,22 @@
-Symfony Standard Edition
+ContactForm application
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+This application uses Symfony 3 framework to create a basic contact registry.
+It uses the standard Symfony 3 stable release and all packages can be installed via composer.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Application itself uses twig templating, single controller, single entity class and single formtype to generate an easy to use addressbook style form.
+Contacts can be edited by resubmitting the data or deleted at listpage.
 
-What's inside?
---------------
+The startpage for the application is: localhost/contactform
 
-The Symfony Standard Edition is configured with the following defaults:
+The paginator full implementation, search, sorting and ajax calls will be added at a later stage.
 
-  * An AppBundle you can use to start coding;
+ContactForm inlcudes
+========================
+This project uses the standard Symfony 3 package and 2 additional Bundles:
 
-  * Twig as the only configured template engine;
-
-  * Doctrine ORM/DBAL;
-
-  * Swiftmailer;
-
-  * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
+* KnpPaginatorBundle (Not fully implemented)
+* Nelmio/Alice fixtures generator
 
   * **FrameworkBundle** - The core Symfony framework bundle
 
@@ -53,8 +47,8 @@ It comes pre-configured with the following bundles:
   * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
     integration
 
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
+All libraries and bundles included in the project are
+released under the MIT or BSD license. I would like to thank Ryan Weaver for helping me a few bugfixes with reactjs.
 
 Enjoy!
 
@@ -63,7 +57,8 @@ Enjoy!
 [7]:  https://symfony.com/doc/3.2/doctrine.html
 [8]:  https://symfony.com/doc/3.2/templating.html
 [9]:  https://symfony.com/doc/3.2/security.html
-[10]: https://symfony.com/doc/3.2/email.html
 [11]: https://symfony.com/doc/3.2/logging.html
 [12]: https://symfony.com/doc/3.2/assetic/asset_management.html
 [13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+[14]: https://github.com/nelmio/alice
+[15]: https://github.com/KnpLabs/KnpPaginatorBundle
